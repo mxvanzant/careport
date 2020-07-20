@@ -1,0 +1,38 @@
+<div class="container">
+  <%= form_tag(nil, method: :get) do %>
+    <div class="form-group">
+      <%= label_tag(:code, "Tracking Code") %>
+      <%= select_tag(
+        :code,
+        options_for_select(code_options, selected_code),
+        class: "form-control"
+      ) %>
+    </div>
+
+    <button
+      id="search"
+      type="submit"
+      class="btn btn-primary"
+    >Submit</button>
+
+  <% end %>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>PAC</th>
+        <th>Type</th>
+        <th>Visit Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @visits.each do |visit| %>
+        <tr>
+          <td><%= visit.pac %></td>
+          <td><%= visit.visit_type %></td>
+          <td class="visit_count"><%= visit.visit_count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
