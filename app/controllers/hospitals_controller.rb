@@ -8,10 +8,11 @@ class HospitalsController < ApplicationController
           count(id) as visit_count
         from visits
         where codes @> ?
+        and hospital_id = ?
         group by pac, visit_type
       SQL
       puts sql
-      @visits = Visit.find_by_sql([sql, JSON.generate([code: selected_code])])
+      @visits = Visit.find_by_sql([sql, JSON.generate([code: selected_code]), params[:id]])
     else
       @visits = Visit
         .where(
